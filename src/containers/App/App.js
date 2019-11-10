@@ -2,6 +2,8 @@
 import React from 'react';
 // Styles
 import './App.css';
+import MyFirstClassComponent from "../../components/MyFirstClassComponent/MyFirstClassComponent";
+import ControlledComponent from "../../components/ControlledComponent/ControlledComponent";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         >
           Learn React
         </a>
+        <MyFirstClassComponent />
+        <ControlledComponent />
       </header>
     </div>
   );

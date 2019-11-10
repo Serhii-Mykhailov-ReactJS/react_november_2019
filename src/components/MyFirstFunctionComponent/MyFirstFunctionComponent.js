@@ -1,5 +1,9 @@
 // Core
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+// Styles
+// TODO: see https://ru.reactjs.org/docs/faq-styling.html
+import './MyFirstFunctionComponent.css';
 
 // My first function component
 // TODO: see https://ru.reactjs.org/docs/components-and-props.html
@@ -9,8 +13,12 @@ function MyFirstFunctionComponent(props) {
   // TODO: use react fefs
   // const elem = document.getElementById('main-header');
 
+  const styles = {
+    backgroundColor: 'yellow',
+  };
+
   return (
-    <h1 id="main-header" className="main-header">
+    <h1 id="" className="main-header" style={styles}>
       Привет {name}, Я функциональный компонент!
     </h1>
   );
@@ -31,7 +39,21 @@ MyFirstFunctionComponent.defaultProps = {
 export default MyFirstFunctionComponent;
 
 // My first arrow function component
-const AppFunc = () => {
+const AppFunc = (props) => {
+  const { currentPage = 0, pageSize = 20 } = props;
+
+  const cb = React.useCallback(() => {
+    getItems({ currentPage, pageSize });
+  }, [currentPage, pageSize]);
+
+  React.useEffect(() => {
+    cb();
+  }, [cb]);
+
+  function getItems() {
+    // Do some magic here
+  }
+
   return (
     <h1>
       Привет, Я стрелка компонент!
@@ -94,8 +116,6 @@ function MyFunctionComponent(props) {
     </>
   );
 }
-
-export default MyFunctionComponent;
 
 // Custom hook
 // TODO: see https://ru.reactjs.org/docs/hooks-custom.html
