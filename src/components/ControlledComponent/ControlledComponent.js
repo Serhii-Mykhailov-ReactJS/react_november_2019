@@ -1,7 +1,7 @@
 // Core
 import React, { useRef, useState } from 'react';
 // Hooks
-import { useInputValue } from '../hooks/useInput';
+import { useInputValue } from '../../hooks/useInput';
 
 // TODO: see https://ru.reactjs.org/docs/uncontrolled-components.html
 // TODO: see https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
