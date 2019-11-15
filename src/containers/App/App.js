@@ -1,29 +1,22 @@
 // Core
-import React from 'react';
+import React, { Suspense } from 'react';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+// Containers
+import Routing from '../Routing/Routing';
+import theme from './theme';
 // Styles
+import 'typeface-roboto';
 import './App.css';
-import MyFirstClassComponent from "../../components/MyFirstClassComponent/MyFirstClassComponent";
-import ControlledComponent from "../../components/ControlledComponent/ControlledComponent";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/containers/App/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <MyFirstClassComponent />
-        <ControlledComponent />
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Suspense fallback={<div>Загрузка...</div>}>
+        <Routing />
+      </Suspense>
+    </ThemeProvider>
   );
 }
 
