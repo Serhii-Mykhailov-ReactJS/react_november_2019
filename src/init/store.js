@@ -16,7 +16,7 @@ const composeEnhancers = dev && devtools ? devtools : compose;
 
 // Инициализируем глобальный store
 // https://redux.js.org/api/createstore
-export const store = createStore(
+const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(...middleware)),
 );
