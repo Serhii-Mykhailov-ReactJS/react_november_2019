@@ -1,56 +1,33 @@
+// Core
 import axios from 'axios';
 
-let list = '';
+const instance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
 
-export function getTodoData(cont) {
-
-  list = cont;
-  fetch('http://localhost:3000/posts')
-    .then(response => response.json())
-    .then(data => {
-      cont.setState({
-        todos: data         
-      })
-    })
+export function getTodoData() {
+  return instance('/posts')
+    .then(res => res.data);
 }
 
-export function addNewTask(cont, value) {
-
-  axios.post('http://localhost:3000/posts', {
+export function addNewTask(value) {
+  return instance.post('/posts', {
     title: value,
     isDone: false
   })
-    .then(data => {
-      cont.setState({
-        todos: [...cont.state.todos, data],
-        value: ''        
-      })})
+    .then(res => res.data);
 }
 
-export function changeCurTaskStatus(cont, id) {
-
-  axios.patch(`http://localhost:3000/posts/${id}`)
-    .then(
-      cont.setState(prevState => {
-        const updatedTodos = prevState.todos.map(todo => {
-          if (todo.id === id) {
-            todo.isDone = !todo.isDone
-          }
-          return todo;
-        })
-        return {
-          todos: updatedTodos
-        }
-      })
-    )
+export function changeCurTaskStatus(id, isDone) {
+  return instance.patch(`/posts/${id}`, { isDone })
+    .then(res => res.data);
 }
 
 export function deleteCurrentTask(cont, id) {
-
-  axios.delete(`http://localhost:3000/posts/${id}`)    
-    .then(
+  axios.delete(`/posts/${id}`)
+    .then(() => {
       cont.setState({
         todos: [...cont.state.todos.filter(todo => todo.id !== id)]
       })
-    )
+    });
 }

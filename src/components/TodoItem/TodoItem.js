@@ -1,34 +1,55 @@
-import React from 'react';
+// Core
+import React, { useCallback } from 'react';
+import cx from 'classnames';
+// Styles
 import '../../assets/styles/TodoItem.css';
 
-function TodoItem(cont) {
-  
+function TodoItem(props) {
+  const {
+    item, onTaskStatusChange, onTaskEdit, onTaskDelete,
+  } = props;
+
+  const { id, isDone, title } = item;
+
   const taskDoneStyle = {
-    fontStyle: "italic",
-    color: "green",
-    textDecoration: "line-through"
-  }
+    fontStyle: 'italic',
+    color: 'green',
+    textDecoration: 'line-through',
+  };
+
+  const todoTextClassNames = cx('todo-text', {
+    '??': isDone,
+  });
+
+  const changeStatusHandler = useCallback(() => {
+    onTaskStatusChange(id, !isDone);
+  }, [onTaskStatusChange, id, isDone]);
+
+  // TODO: () => onTaskEdit(id);
+  // TODO: () => onTaskDelete(id);
 
   return (
-    <div className="todo-item">  
+    <div className="todo-item">
       <input
         className="todo-check"
         type="checkbox"
-        checked={cont.item.isDone} 
-        onChange={() => cont.onTaskStatusChange(cont.item.id)}
+        checked={isDone}
+        onChange={changeStatusHandler}
       />
-      <div className="todo-text" style={cont.item.isDone ? taskDoneStyle: null}>{cont.item.title}</div>
+      <div className={todoTextClassNames} style={isDone ? taskDoneStyle: null}>
+        {title}
+      </div>
       <input
         className="todo-edit"
         type="button"
         value="Edit"
-        onClick={() => cont.onTaskEdit(cont.item.id)}
-      />      
+        onClick={() => onTaskEdit(id)}
+      />
       <input
         className="todo-delete"
         type="button"
         value="Del"
-        onClick={() => cont.onTaskDelete(cont.item.id)}
+        onClick={() => onTaskDelete(id)}
       />
     </div>
   );

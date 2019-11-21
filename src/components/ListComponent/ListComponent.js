@@ -1,25 +1,33 @@
-import React from 'react';
-import TodoItem from "../TodoItem/TodoItem";
-import { getTodoData, deleteCurrentTask, changeCurTaskStatus } from "../../api/Api";
+import React, { Component } from 'react';
+import TodoItem from '../TodoItem/TodoItem';
+import { getTodoData, deleteCurrentTask, changeCurTaskStatus } from '../../api/Api';
 
-class ListComponent extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      todos: [],
-    }  
+class ListComponent extends Component {
+  constructor(props) {
+    super(props);
     this.onTaskStatusChange = this.onTaskStatusChange.bind(this);
     this.onTaskEdit = this.onTaskEdit.bind(this);
     this.onTaskDelete = this.onTaskDelete.bind(this);
-  }  
-
-  componentDidMount() {
-    getTodoData(this);
   }
 
-  onTaskStatusChange(id) {
-    changeCurTaskStatus(this, id);
+  componentDidMount() {
+    this.getTodoDataAsync();
+  }
+
+  getTodoDataAsync = () => {
+    const { getTodos } = this.props;
+    getTodos();
+  };
+
+  onTaskStatusChange(id, data) {
+    changeCurTaskStatus(id, data)
+      .then((data) => {
+        const { id } = data;
+        // copy todo
+        // find index
+        // add new todo
+        // setState
+      });
   }
 
   onTaskEdit(id) {
@@ -30,19 +38,23 @@ class ListComponent extends React.Component {
     deleteCurrentTask(this, id);
   }
 
-  render() {
-    const todoItems = this.state.todos.map(item =>
+  renderTodoItems = () => {
+    const { todos } = this.props;
+    return todos.map(item => (
       <TodoItem
         key={item.id}
         item={item}
         onTaskStatusChange={this.onTaskStatusChange}
-        onTaskEdit={this.onTaskEdit}        
+        onTaskEdit={this.onTaskEdit}
         onTaskDelete={this.onTaskDelete}
-      />)
+      />
+    ));
+  };
 
+  render() {
     return (
       <div className="todo-list">
-        {todoItems}
+        {this.renderTodoItems()}
       </div>
     );
   }

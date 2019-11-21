@@ -1,55 +1,67 @@
-import React from 'react';
-import ListComponent from "../ListComponent/ListComponent";
-import { addNewTask } from "../../api/Api";
+import React, { Component } from 'react';
+import ListComponent from '../ListComponent/ListComponent';
+import { addNewTask, getTodoData } from '../../api/Api';
 import '../../assets/styles/FormComponent.css';
 
-class FormComponent extends React.Component {
-  constructor() {
-    super();
+class FormComponent extends Component {
+  state = {
+    todos: [],
+    value: '',
+  };
 
-    this.state = {
-      todos: [],
-      value: ''
-    }
-    this.onInputTextChange = this.onInputTextChange.bind(this);
-    this.onAddTaskClick = this.onAddTaskClick.bind(this);    
-  }
-
-  onFormSubmit(event) {
+  onFormSubmit = (event) => {
     event.preventDefault();
-  }
+    // TODO: add form submit handler
+  };
 
-  onInputTextChange(event) {
+  onInputTextChange = (event) => {
     this.setState({
-      value: event.target.value
+      value: event.target.value,
     });
-  }
+  };
 
-  onAddTaskClick() {
-    addNewTask(this, this.state.value);
-  }
+  onAddTaskClick = () => {
+    const { value } = this.state;
+    addNewTask(value)
+      .then((data) => {
+        this.setState(prevState => ({
+          todos: [...prevState.todos, data],
+        }));
+      });
+  };
 
-  render() {  
+  getTodoDataAsync = () => {
+    getTodoData()
+      .then((data) => {
+        this.setState({ todos: data });
+      });
+  };
+
+  render() {
+    const { todos } = this.state;
     return (
       <form className="todo-form" onSubmit={this.onFormSubmit}>
         <div className="todo-header">
-          <input            
+          <input
             className="todo-add-input"
             type="text"
             value={this.state.value}
             onChange={this.onInputTextChange}
           />
           <input
-            className="todo-add-button"        
+            className="todo-add-button"
             type="button"
             value="Add"
-            onClick={this.onAddTaskClick}            
+            onClick={this.onAddTaskClick}
           />
-        </div>        
-        <ListComponent />
+        </div>
+        <ListComponent
+          getTodos={this.getTodoDataAsync}
+          todos={todos}
+        />
       </form>
     );
   }
 }
-  
-export default FormComponent;    
+
+export default FormComponent;
