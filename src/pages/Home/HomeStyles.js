@@ -15,4 +15,7 @@ export const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  progress: {
+    margin: theme.spacing(2),
+  },
 }));

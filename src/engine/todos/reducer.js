@@ -9,7 +9,8 @@ const initialState = {
   todoItem: {
     pending: false,
     data: {},
-  }
+  },
+  isLoading: false,
 };
 
 /**
@@ -32,8 +33,11 @@ export function todosReducer(state = initialState, action) {
 
   // Проверяем тип action
   switch (type) {
-    case '': {
-      return state;
+    case types.SET_LOADING: {
+      return {
+        ...state,
+        isLoading: payload,
+      };
     }
 
     case types.ADD_TODO: {

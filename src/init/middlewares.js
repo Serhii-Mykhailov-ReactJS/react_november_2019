@@ -1,5 +1,6 @@
 // Core
 import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
 
 // Логер для отслеживания actions в консоли браузера
 // https://www.npmjs.com/package/redux-logger
@@ -27,7 +28,7 @@ const dev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === '
 // Добавляем middleware
 // https://redux.js.org/advanced/middleware
 // https://maxfarseer.gitbooks.io/redux-course-ru/content/usiliteli_logger.html
-const middleware = [];
+const middleware = [thunk];
 
 // Проверка на is development
 // Нам не нужен логгер в production режиме

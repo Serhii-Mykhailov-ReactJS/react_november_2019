@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 // Engines
 import { actions } from '../../engine/todos/actions';
 // Styles
@@ -16,7 +17,7 @@ function Home(props) {
   const classes = useStyles();
   // todos - попал в компонент из mapStateToProps
   // addTodo - попал в компонент из mapDispatchToProps
-  const { todos, addTodo } = props;
+  const { todos, addTodo, isLoading } = props;
 
   // react-redux hook useDispatch - позволяет получить dispatch из контекста
   // https://react-redux.js.org/api/hooks#usedispatch
@@ -64,6 +65,9 @@ function Home(props) {
             <button onClick={onButtonClick}>
               add todo
             </button>
+            {isLoading && (
+              <CircularProgress />
+            )}
           </Paper>
         </Grid>
       </Grid>
@@ -80,6 +84,7 @@ function mapStateToProps(state) {
   // Возвращает объект, поля которого будут добавлены в props
   return {
     todos: state.todos.todos,
+    isLoading: state.todos.isLoading,
   };
 }
 
