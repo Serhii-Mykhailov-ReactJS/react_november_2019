@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 // Engines
-import { actions } from '../../engine/todos/actions';
+import { actions } from '../../engine/core/todos/actions';
 // Styles
 import { useStyles } from './HomeStyles';
 

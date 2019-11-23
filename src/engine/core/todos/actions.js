@@ -1,7 +1,7 @@
 // Types
 import { types } from './types';
 // Helpers
-import { actionCreator } from '../../lib/helpers';
+import { actionCreator } from '../../../lib/helpers';
 
 function setLoading(isLoading) {
   // { type: types.SET_LOADING, payload: isLoading }
@@ -35,5 +35,8 @@ export const actions = Object.freeze({
     };
     // Можно истользовать helper функцию которая генерирует action
     // return actionCreator(types.ADD_TODO, todo);
+  },
+  setTodoList(list) {
+    return actionCreator(types.SET_TODOS_LIST, list);
   },
 });

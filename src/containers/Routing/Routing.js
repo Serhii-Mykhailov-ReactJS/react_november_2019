@@ -11,12 +11,14 @@ import {
 } from 'react-router-dom';
 // Components
 import AppBarComponent from '../../components/AppBarComponent/AppBarComponent';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 // Constants
-import { routing } from '../../engine/routing';
+import { routing } from '../../engine/config/routes/routing';
 // Pages
 const AboutPage = lazy(() => import('../../pages/About/About'));
 const HomePage = lazy(() => import('../../pages/Home/Home'));
 const Page404 = lazy(() => import('../../pages/Page404/Page404'));
+const TodosPage = lazy(() => import('../../pages/Todos/Todos'));
 
 function Routing() {
   return (
@@ -37,14 +39,22 @@ function Main() {
   // relative to the parent route, while the `url` lets
   // us build relative links.
   const { path, url } = useRouteMatch();
+  // URLs
+  const about = `${path}${routing.about}`;
+  const error404 = `${path}${routing.error404}`;
+  const errorPage = `${url}${routing.error404}`;
+  const todoPage = `${path}${routing.todos}`;
 
   return (
-    <Switch>
-      <Route exact path={path} component={HomePage} />
-      <Route path={`${path}${routing.about}`} component={AboutPage} />
-      <Route exact path={`${path}${routing.error404}`} component={Page404} />
-      <Redirect to={`${url}${routing.error404}`} />
-    </Switch>
+    <ErrorBoundary>
+      <Switch>
+        <Route exact path={path} component={HomePage} />
+        <Route path={about} component={AboutPage} />
+        <Route exact path={error404} component={Page404} />
+        <Route exact path={todoPage} component={TodosPage} />
+        <Redirect to={errorPage} />
+      </Switch>
+    </ErrorBoundary>
   );
 }
 

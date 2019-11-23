@@ -5,7 +5,7 @@ import { types } from './types';
 // Для каждого редюсера начальное состояние своё
 // https://redux.js.org/basics/reducers
 const initialState = {
-  todos: [{ 'abc': 'abc' }],
+  todos: [],
   todoItem: {
     pending: false,
     data: {},
@@ -49,6 +49,13 @@ export function todosReducer(state = initialState, action) {
       return {
         ...state,
         todos: todosCopy,
+      };
+    }
+
+    case types.SET_TODOS_LIST: {
+      return {
+        ...state,
+        todos: payload,
       };
     }
 

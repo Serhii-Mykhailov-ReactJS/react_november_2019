@@ -6,11 +6,15 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+// Helpers
+import { throwError } from '../../lib/helpers';
 // Styles
 import { useStyles } from './AboutStyles';
 
 function About() {
   const classes = useStyles();
+
+  throwError('My custom error! Press ESC or [x] to dismiss --->');
 
   return (
     <Container maxWidth="lg" className={classes.container}>

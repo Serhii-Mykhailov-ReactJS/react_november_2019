@@ -17,13 +17,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
+// Icons
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-// Icons
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 // Engine
-import { routing } from '../../engine/routing';
+import { routing } from '../../engine/config/routes/routing';
 // Styles
 import { useStyles } from './AppBarComponentStyles';
 
@@ -67,28 +68,36 @@ function AppBarComponent(props) {
         </div>
         <Divider />
         <List>
-          <div>
-            <ListItem button>
-              <Link to={routing.home}>
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-              </Link>
-              <NavLink to={routing.home}>
-                <ListItemText primary="Home" />
-              </NavLink>
-            </ListItem>
-            <ListItem button>
-              <Link to={routing.about}>
-                <ListItemIcon>
-                  <ShoppingCartIcon />
-                </ListItemIcon>
-              </Link>
-              <NavLink to={routing.about}>
-                <ListItemText primary="About" />
-              </NavLink>
-            </ListItem>
-          </div>
+          <ListItem button>
+            <Link to={routing.home}>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+            </Link>
+            <NavLink to={routing.home}>
+              <ListItemText primary="Home" />
+            </NavLink>
+          </ListItem>
+          <ListItem button>
+            <Link to={routing.about}>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+            </Link>
+            <NavLink to={routing.about}>
+              <ListItemText primary="About" />
+            </NavLink>
+          </ListItem>
+          <ListItem button>
+            <Link to={routing.todos}>
+              <ListItemIcon>
+                <CheckBoxIcon />
+              </ListItemIcon>
+            </Link>
+            <NavLink to={routing.todos}>
+              <ListItemText primary="Todo" />
+            </NavLink>
+          </ListItem>
         </List>
         <Divider />
         <List>

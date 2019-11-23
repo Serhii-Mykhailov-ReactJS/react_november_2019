@@ -1,7 +1,7 @@
 // Core
 import { combineReducers } from 'redux';
 // Reducers
-import { todosReducer } from '../engine/todos/reducer';
+import { todosReducer } from '../engine/core/todos/reducer';
 
 // Инициализируем главный редюсер
 // Сюда добавляем все редюсеры нашего приложения
