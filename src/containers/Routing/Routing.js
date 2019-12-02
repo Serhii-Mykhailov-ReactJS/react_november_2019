@@ -19,6 +19,7 @@ const AboutPage = lazy(() => import('../../pages/About/About'));
 const HomePage = lazy(() => import('../../pages/Home/Home'));
 const Page404 = lazy(() => import('../../pages/Page404/Page404'));
 const TodosPage = lazy(() => import('../../pages/Todos/Todos'));
+const LoginPage = lazy(() => import('../../pages/Login/Login'));
 
 function Routing() {
   return (
@@ -44,6 +45,7 @@ function Main() {
   const error404 = `${path}${routing.error404}`;
   const errorPage = `${url}${routing.error404}`;
   const todoPage = `${path}${routing.todos}`;
+  const loginPage = `${path}${routing.login}`;
 
   return (
     <ErrorBoundary>
@@ -52,6 +54,7 @@ function Main() {
         <Route path={about} component={AboutPage} />
         <Route exact path={error404} component={Page404} />
         <Route exact path={todoPage} component={TodosPage} />
+        <Route exact path={loginPage} component={LoginPage} />
         <Redirect to={errorPage} />
       </Switch>
     </ErrorBoundary>

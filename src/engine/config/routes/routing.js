@@ -3,4 +3,5 @@ export const routing = Object.freeze({
   home: '/',
   error404: '404',
   todos: 'todos',
+  login: 'login',
 });
